@@ -272,11 +272,6 @@ export const defaultBreadcrumb: Breadcrumb = {
 export const allOccasionOptions: Option[] = [
   {
     slug: "flowers-to-say-thanks-sorry-etc",
-    value: 9,
-    label: "Mother's Day Flowers"
-  },
-  {
-    slug: "flowers-to-say-thanks-sorry-etc",
     value: 0,
     label: "Christmas Flowers"
   },
@@ -303,7 +298,11 @@ export const allOccasionOptions: Option[] = [
   },
   { slug: "bridal-bouquets", value: 6, label: "Bridal Flowers" },
   { slug: "funeral-condolence-flowers", value: 7, label: "Funeral Flowers" },
-
+  {
+    slug: "flowers-to-say-thanks-sorry-etc",
+    value: 9,
+    label: "Mother's Day Flowers"
+  },
   { slug: "valentines-day-flowers", value: 8, label: "Valentine's Flowers" }
 ];
 
@@ -2368,31 +2367,6 @@ export const productSampleData = {
 
 export const links: AppLink[] = [
   {
-    title: "Mother's Day",
-    url: "",
-    children: [
-      {
-        title: "Flowers",
-        url: "/product-category/flowers-to-say-thanks-sorry-etc",
-        children: []
-      },
-      {
-        title: "VIP Flowers",
-        url: "/vip",
-        children: []
-      },
-      {
-        title: "Gifts",
-        url: "/product-category/gifts",
-        children: []
-      }
-    ],
-    featuredSlugs: [
-      "loxarre-bouquet-a-bouquet-of-arrangement-of-red-roses-and-purple-roses-with-million-stars",
-      "classic-roses-and-chocolate"
-    ]
-  },
-  {
     url: "",
     title: "Occasions",
     subtitle: "Select Occasion",
@@ -2418,31 +2392,7 @@ export const links: AppLink[] = [
           }
         ]
       },
-      {
-        title: "Mother's Day",
-        url: "",
-        children: [
-          {
-            title: "Flowers",
-            url: "/product-category/flowers-to-say-thanks-sorry-etc",
-            children: []
-          },
-          {
-            title: "VIP Flowers",
-            url: "/vip",
-            children: []
-          },
-          {
-            title: "Gifts",
-            url: "/product-category/gifts",
-            children: []
-          }
-        ],
-        featuredSlugs: [
-          "loxarre-bouquet-a-bouquet-of-arrangement-of-red-roses-and-purple-roses-with-million-stars",
-          "classic-roses-and-chocolate"
-        ]
-      },
+
       {
         title: "Flowers for Romance, Sorry, Thanks, Get Well Soon etc",
         url: "",
@@ -2724,11 +2674,11 @@ export const links: AppLink[] = [
       "caravaggio-assorted-italian-unisex-gift-set-more"
     ]
   },
-  // {
-  //   url: "/product-category/indoor-plants-and-cactus",
-  //   title: "Plants",
-  //   children: []
-  // },
+  {
+    url: "/product-category/indoor-plants-and-cactus",
+    title: "Plants",
+    children: []
+  },
   {
     title: "FAQ",
     url: "/faq-how-to-buy-fresh-flowers-and-gifts-in-lagos-and-abuja",
