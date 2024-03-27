@@ -199,8 +199,22 @@ const ProductPage: FunctionComponent<{ product: Product }> = props => {
       setCartItems([...cartItems, cartItem]);
       notify(
         "success",
-        <Link href={"/cart"}>
-          <p>
+        <button>
+          Item Added To Cart{" "}
+          <span
+            className="view-cart"
+            onClick={() => setShouldShowCart(!shouldShowCart)}
+          >
+            View Cart
+          </span>
+        </button>
+      );
+    } else {
+      if (existingCartItem.SKU !== selectedSize?.sku) {
+        setCartItems([...cartItems, cartItem]);
+        notify(
+          "success",
+          <button>
             Item Added To Cart{" "}
             <span
               className="view-cart"
@@ -208,25 +222,7 @@ const ProductPage: FunctionComponent<{ product: Product }> = props => {
             >
               View Cart
             </span>
-          </p>
-        </Link>
-      );
-    } else {
-      if (existingCartItem.SKU !== selectedSize?.sku) {
-        setCartItems([...cartItems, cartItem]);
-        notify(
-          "success",
-          <Link href={"/cart"}>
-            <p>
-              Item Added To Cart{" "}
-              <span
-                className="view-cart"
-                onClick={() => setShouldShowCart(!shouldShowCart)}
-              >
-                View Cart
-              </span>
-            </p>
-          </Link>
+          </button>
         );
       } else if (existingCartItem.SKU === selectedSize?.sku) {
         const newCartItem = cartItems.map(item => {
@@ -243,17 +239,15 @@ const ProductPage: FunctionComponent<{ product: Product }> = props => {
         setCartItems(newCartItem);
         notify(
           "success",
-          <Link href={"/cart"}>
-            <p>
-              Item Added To Cart{" "}
-              <span
-                className="view-cart"
-                onClick={() => setShouldShowCart(!shouldShowCart)}
-              >
-                View Cart
-              </span>
-            </p>
-          </Link>
+          <button>
+            Item Added To Cart{" "}
+            <span
+              className="view-cart"
+              onClick={() => setShouldShowCart(!shouldShowCart)}
+            >
+              View Cart
+            </span>
+          </button>
         );
       }
       // else if (existingDesign?.name === selectedDesign?.name) {

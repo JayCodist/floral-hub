@@ -9,15 +9,19 @@ import CheckoutHeader from "./CheckoutHeader";
 import AuthModal from "./AuthModal";
 import SettingsContext from "../../utils/context/SettingsContext";
 import useScrollCheck from "../../utils/hooks/useScrollCheck";
+import CartContext from "./CartContext";
 
 const Layout: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
   const { pathname: _pathname } = useRouter();
   const pathname = _pathname.split("/")[1];
   const deviceType = useDeviceType();
 
-  const { shouldShowAuthDropdown, setShouldShowAuthDropdown } = useContext(
-    SettingsContext
-  );
+  const {
+    shouldShowAuthDropdown,
+    setShouldShowAuthDropdown,
+    shouldShowCart,
+    setShouldShowCart
+  } = useContext(SettingsContext);
 
   const hasScrolled = useScrollCheck();
 
@@ -32,8 +36,14 @@ const Layout: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
       ) : (
         <Header />
       )}
+
       <main className={[styles.main, hasScrolled && "has-scrolled"].join(" ")}>
         <CurrencyController />
+        <CartContext
+          visible={shouldShowCart}
+          cancel={() => setShouldShowCart(false)}
+          header={pathname === "checkout" ? "checkout" : "main"}
+        />
         {children}
         {pathname !== "checkout" && <Footer />}
       </main>

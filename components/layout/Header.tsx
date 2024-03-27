@@ -48,7 +48,9 @@ const Header: FunctionComponent = () => {
     setSearchText,
     setUser,
     notify,
-    setShouldShowAuthDropdown
+    setShouldShowAuthDropdown,
+    shouldShowCart,
+    setShouldShowCart
   } = useContext(SettingsContext);
 
   const searchDropdownRef = useOutsideClick<HTMLDivElement>(() => {
@@ -487,7 +489,9 @@ const Header: FunctionComponent = () => {
             <Button
               className={[styles["cart-button"]].join(" ")}
               type="plain"
-              url="/cart"
+              onClick={() => {
+                setShouldShowCart(!shouldShowCart);
+              }}
             >
               <img
                 alt="cart"

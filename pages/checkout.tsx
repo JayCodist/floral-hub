@@ -179,7 +179,8 @@ const Checkout: FunctionComponent = () => {
     setDeliveryFee,
     setOrderLoading,
     setOrder,
-    cartItems
+    cartItems,
+    setShouldShowCart
   } = useContext(SettingsContext);
 
   const deviceType = useDeviceType();
@@ -1654,16 +1655,15 @@ const Checkout: FunctionComponent = () => {
                       <p className="text-medium">
                         Order Summary ({cartItems.length} items)
                       </p>
-                      <Link href="/cart">
-                        <a
-                          className="text-medium underline"
-                          style={{
-                            color: "#b240da"
-                          }}
-                        >
-                          View Cart
-                        </a>
-                      </Link>
+                      <button
+                        className="text-medium underline"
+                        style={{
+                          color: "#b240da"
+                        }}
+                        onClick={() => setShouldShowCart(true)}
+                      >
+                        View Cart
+                      </button>
                     </div>
                     <div className="flex between margin-bottom">
                       <span className="normal-text">Subtotal</span>
