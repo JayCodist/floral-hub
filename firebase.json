@@ -1,6 +1,6 @@
 {
   "hosting": [{
-    "site": "floralhub",
+    "target": "floralhub",
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
@@ -200,7 +200,7 @@
     "trailingSlash": true
   },
   {
-    "site": "floralhubStaging",
+    "target": "floralhubStaging",
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
