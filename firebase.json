@@ -200,7 +200,7 @@
     "trailingSlash": true
   },
   {
-    "site": "floralhub-staging",
+    "site": "floralhubStaging",
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
