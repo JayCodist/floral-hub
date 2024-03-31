@@ -1,5 +1,18 @@
 {
-  "projects": {
-    "default": "regal-operations-defy"
+  "targets": {
+    "regal-operations-defy": {
+      "hosting": {
+        "floralhub": [
+          "floralhub"
+        ]
+      }
+    },
+    "regal-operations-staging": {
+      "hosting": {
+        "floralhubStaging": [
+          "floralhub-staging"
+        ]
+      }
+    }
   }
 }

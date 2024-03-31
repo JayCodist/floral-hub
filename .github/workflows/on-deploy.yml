@@ -1,37 +1,59 @@
-name: Deploy to Firebase
+name: Deploy to Firebase Hosting
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
+      - staging
 
 jobs:
   build:
     name: Build and Deploy to Firebase
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
+          cache: 'yarn'
       - name: Install Dependencies
         run: yarn
-      - name: Create env file
-        run: |
-          touch .env
-          echo NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN=${{ secrets.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN }} >> .env
-          echo NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }} >> .env
-          cat .env
+
+      - name: Get Doppler secrets (Staging)
+        uses: dopplerhq/secrets-fetch-action@v1.2.0
+        if: github.ref == 'refs/heads/staging'
+        with:
+          doppler-token: ${{ secrets.DOPPLER_STAGING_TOKEN }}
+          inject-env-vars: true
+
+      - name: Get Doppler secrets (Production)
+        uses: dopplerhq/secrets-fetch-action@v1.2.0
+        if: github.ref == 'refs/heads/main'
+        with:
+          doppler-token: ${{ secrets.DOPPLER_PRODUCTION_TOKEN }}
+          inject-env-vars: true
+
       - name: Build
         run: yarn deploy
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@v12.9.0
-        with:
-          args: deploy --only hosting
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          CI: ""
+
+      - name: Deploy to Firebase Staging
+        if: github.ref == 'refs/heads/staging'
+        uses: w9jds/firebase-action@v11.18.0
+        with:
+          args: deploy --only hosting:floralhubStaging --project ${{ secrets.PROJECT_ID_STAGING }}
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_STAGING }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID_STAGING }}
+
+      - name: Deploy to Firebase Production
+        if: github.ref == 'refs/heads/main'
+        uses: w9jds/firebase-action@v11.18.0
+        with:
+          args: deploy --only hosting:floralhub --project ${{ secrets.PROJECT_ID_PRODUCTION }}
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_PRODUCTION }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID_PRODUCTION }}

@@ -1,7 +1,7 @@
 import User from "../types/User";
 import AppStorage, { AppStorageConstants } from "./storage-helpers";
 
-const baseUrl = "https://regal-operations-defy.appspot.com";
+const baseUrl = process.env.NEXT_PUBLIC_REACT_APP_API_URL;
 // const baseUrl = "http://localhost:8080";
 
 const getAPIHeaders = () => {
